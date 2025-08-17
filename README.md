@@ -6,15 +6,15 @@ RAG Agent Platform is a multi-tenant agent SaaS platform. Built on LLMs, RAG, an
 
 
 ## Requisites
-- Java, Spring Boot
+- Java 17, Spring Boot 3
 - PostgreSQL
 - PGVector
 - RabbitMQ
-- Object Storage
+- **Object Storage Service**
   - Amazon S3
   - ✅ Qiniu Cloud Object Storage (KODO)
   - Tencent Cloud Object Storage (COS) 
-- Model Provider 
+- **Model Provider** 
   - ✅ Silicon Flow 硅基流动 (https://www.siliconflow.com/)
   - SiliconFlow is an AI platform that gives developers a single API to run many models for text, embeddings, reranking, and multimodal tasks.
   - 硅基流动是面向开发者的 AI 模型与算力平台，聚合开源/商用大模型并提供统一 API 的文本、向量、重排与多模态推理服务。
