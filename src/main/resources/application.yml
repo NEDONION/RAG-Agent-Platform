@@ -1,0 +1,119 @@
+server:
+  port: ${SERVER_PORT:8088}
+  servlet:
+    context-path: /api
+  # 添加Tomcat异步请求配置
+  tomcat:
+    threads:
+      max: 200 # 最大工作线程数
+    connection-timeout: 2000000 # 连接超时毫秒
+    max-connections: 10000 # 最大连接数
+    accept-count: 100 # 等待队列长度
+
+spring:
+  application:
+    name: AgentX
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+    listener:
+      simple: # 添加 simple 下的并发配置
+        concurrency: 19
+        max-concurrency: 19
+        prefetch: 1
+        acknowledge-mode: manual
+        default-requeue-rejected: true
+        retry:
+          enabled: true
+          max-attempts: 3
+          initial-interval: 3000
+      direct:
+        acknowledge-mode: manual
+        default-requeue-rejected: true
+        retry:
+          enabled: true
+          max-attempts: 3
+          initial-interval: 3000
+    publisher-returns: true
+    publisher-confirm-type: correlated
+    connection-timeout: 200000
+    cache:
+      channel:
+        size: 25 # 添加通道缓存大小
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:agentx}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+# MyBatis-Plus配置
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  type-aliases-package: org.xhy.domain
+  type-handlers-package: org.xhy.infrastructure.converter
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted_at
+      logic-delete-value: now()
+      logic-not-delete-value: "null"
+    banner: false
+
+logging:
+  level:
+    root: info
+    org.xhy: debug
+  file:
+    name: logs/agent-x.log
+mail:
+  smtp:
+    host: ${MAIL_SMTP_HOST:smtp.qq.com}
+    port: ${MAIL_SMTP_PORT:587}
+    username: ${MAIL_SMTP_USERNAME:}
+    password: ${MAIL_SMTP_PASSWORD:}
+  verification:
+    template: ${MAIL_VERIFICATION_TEMPLATE:您的验证码是:%s，有效期10分钟，请勿泄露给他人。}
+    subject: ${MAIL_VERIFICATION_SUBJECT:AgentX - 邮箱验证码}
+
+embedding:
+  name: OpenAI
+  vector-store:
+    host: ${VECTOR_DB_HOST:${DB_HOST:localhost}}
+    port: ${VECTOR_DB_PORT:${DB_PORT:5432}}
+    user: ${VECTOR_DB_USER:${DB_USER:postgres}}
+    password: ${VECTOR_DB_PASSWORD:${DB_PASSWORD:postgres}}
+    database: ${VECTOR_DB_NAME:${DB_NAME:agentx}}
+    table: ${VECTOR_DB_TABLE:public.vector_store}
+    dimension: ${VECTOR_DB_DIMENSION:1024}
+    drop-table-first: ${VECTOR_DB_DROP_TABLE_FIRST:false}
+    create-table: ${VECTOR_DB_CREATE_TABLE:true}
+
+rerank:
+  name: OpenAI
+  api-key: ${SILICONFLOW_API_KEY}
+  api-url: ${SILICONFLOW_API_URL_RERANK:https://api.siliconflow.com/v1/rerank}
+  model: ${SILICONFLOW_MODEL_RERANK_MODEL:Qwen/Qwen3-Reranker-4B}
+  timeout: ${SILICONFLOW_TIMEOUT:30000}
+
+dromara:
+  x-file-storage: #文件存储配置
+    default-platform: amazon-s3-1 #默认使用的存储平台
+    thumbnail-suffix: ".min.jpg" #缩略图后缀，例如【.min.jpg】【.png】
+    #对应平台的配置写在这里，注意缩进要对齐
+    amazon-s3: # 0.0.7 及以前的版本，配置名称是：aws-s3
+      - platform: amazon-s3-1 # 存储平台标识
+        enable-storage: true # 启用存储
+        access-key: ${S3_SECRET_ID}
+        secret-key: ${S3_SECRET_KEY}
+        region: ${S3_REGION} # 与 end-point 参数至少填一个
+        end-point: ${S3_ENDPOINT} # 与 region 参数至少填一个
+        bucket-name: ${S3_BUCKET_NAME}
+        domain: ${S3_DOMAIN} # 访问域名，注意“/”结尾，例如：https://abc.hn-bkt.clouddn.com/
+        base-path: s3/ # 基础路径
