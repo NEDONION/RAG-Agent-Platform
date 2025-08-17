@@ -60,4 +60,11 @@ source ~/.zshrc || true
 
 # 3. start via homebrew
 brew services start postgresql@14
+
+# 4. Query the current user after startup - 尝试用你的 macOS 用户名登录
+psql -h 127.0.0.1 -p 5432 -U "$(whoami)" -d postgres -c "\du"
+
+# 5. create super user role 
+# username: postgres, password: postgres
+psql -d postgres -c "CREATE ROLE postgres WITH LOGIN SUPERUSER PASSWORD 'postgres';"
 ```
