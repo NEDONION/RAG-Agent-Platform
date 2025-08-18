@@ -4,7 +4,6 @@ import dev.langchain4j.service.TokenStream;
 import dev.langchain4j.service.tool.ToolProvider;
 import java.util.concurrent.atomic.AtomicReference;
 import org.springframework.stereotype.Component;
-import org.lucas.application.billing.service.BillingService;
 import org.lucas.application.conversation.dto.AgentChatResponse;
 import org.lucas.application.conversation.service.handler.context.ChatContext;
 import org.lucas.application.conversation.service.message.AbstractMessageHandler;
@@ -17,7 +16,6 @@ import org.lucas.domain.conversation.service.MessageDomainService;
 import org.lucas.domain.conversation.service.SessionDomainService;
 import org.lucas.domain.llm.service.HighAvailabilityDomainService;
 import org.lucas.domain.llm.service.LLMDomainService;
-import org.lucas.domain.user.service.AccountDomainService;
 import org.lucas.domain.user.service.UserSettingsDomainService;
 import org.lucas.infrastructure.llm.LLMServiceFactory;
 import org.lucas.infrastructure.transport.MessageTransport;
@@ -31,10 +29,9 @@ public class PreviewMessageHandler extends AbstractMessageHandler {
     public PreviewMessageHandler(LLMServiceFactory llmServiceFactory, MessageDomainService messageDomainService,
             HighAvailabilityDomainService highAvailabilityDomainService, SessionDomainService sessionDomainService,
             UserSettingsDomainService userSettingsDomainService, LLMDomainService llmDomainService,
-            RagToolManager ragToolManager, BillingService billingService, AccountDomainService accountDomainService,
-            AgentToolManager agentToolManager) {
+            AgentToolManager agentToolManager, RagToolManager ragToolManager) {
         super(llmServiceFactory, messageDomainService, highAvailabilityDomainService, sessionDomainService,
-                userSettingsDomainService, llmDomainService, ragToolManager, billingService, accountDomainService);
+                userSettingsDomainService, llmDomainService, ragToolManager);
         this.agentToolManager = agentToolManager;
     }
 
@@ -72,15 +69,11 @@ public class PreviewMessageHandler extends AbstractMessageHandler {
         tokenStream.onCompleteResponse(chatResponse -> {
             // 发送结束消息
             transport.sendEndMessage(connection, AgentChatResponse.buildEndMessage(MessageType.TEXT));
-
-            // 执行模型调用计费
-            performBillingWithErrorHandling(chatContext, chatResponse.tokenUsage().inputTokenCount(),
-                    chatResponse.tokenUsage().outputTokenCount(), transport, connection);
         });
 
         // 工具执行处理
         tokenStream.onToolExecuted(toolExecution -> {
-            if (messageBuilder.get().length() > 0) {
+            if (!messageBuilder.get().isEmpty()) {
                 transport.sendMessage(connection, AgentChatResponse.buildEndMessage(MessageType.TEXT));
                 llmEntity.setContent(messageBuilder.toString());
 

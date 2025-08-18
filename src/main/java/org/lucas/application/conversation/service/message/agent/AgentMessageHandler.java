@@ -1,37 +1,29 @@
 package org.lucas.application.conversation.service.message.agent;
 
 import dev.langchain4j.service.tool.ToolProvider;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.lucas.application.billing.service.BillingService;
 import org.lucas.application.conversation.service.handler.context.ChatContext;
-import org.lucas.application.conversation.service.message.TracingMessageHandler;
+import org.lucas.application.conversation.service.message.AbstractMessageHandler;
 import org.lucas.application.conversation.service.message.agent.tool.RagToolManager;
-import org.lucas.application.trace.collector.TraceCollector;
 import org.lucas.domain.conversation.service.MessageDomainService;
 import org.lucas.domain.conversation.service.SessionDomainService;
 import org.lucas.domain.llm.service.HighAvailabilityDomainService;
 import org.lucas.domain.llm.service.LLMDomainService;
-import org.lucas.domain.user.service.AccountDomainService;
 import org.lucas.domain.user.service.UserSettingsDomainService;
 import org.lucas.infrastructure.llm.LLMServiceFactory;
 
 /** Agent消息处理器 用于支持工具调用的对话模式 实现任务拆分、执行和结果汇总的工作流 使用事件驱动架构进行状态转换 */
 @Component(value = "agentMessageHandler")
-public class AgentMessageHandler extends TracingMessageHandler {
+public class AgentMessageHandler extends AbstractMessageHandler {
 
-    private static final Logger logger = LoggerFactory.getLogger(AgentMessageHandler.class);
-    private AgentToolManager agentToolManager;
+    private final AgentToolManager agentToolManager;
 
     public AgentMessageHandler(LLMServiceFactory llmServiceFactory, MessageDomainService messageDomainService,
             HighAvailabilityDomainService highAvailabilityDomainService, SessionDomainService sessionDomainService,
             UserSettingsDomainService userSettingsDomainService, LLMDomainService llmDomainService,
-            RagToolManager ragToolManager, BillingService billingService, AccountDomainService accountDomainService,
-            TraceCollector traceCollector, AgentToolManager agentToolManager) {
+            AgentToolManager agentToolManager, RagToolManager ragToolManager) {
         super(llmServiceFactory, messageDomainService, highAvailabilityDomainService, sessionDomainService,
-                userSettingsDomainService, llmDomainService, ragToolManager, billingService, accountDomainService,
-                traceCollector);
+                userSettingsDomainService, llmDomainService, ragToolManager);
         this.agentToolManager = agentToolManager;
     }
 

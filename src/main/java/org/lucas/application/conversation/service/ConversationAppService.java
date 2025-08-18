@@ -3,7 +3,6 @@ package org.lucas.application.conversation.service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -303,7 +302,7 @@ public class ConversationAppService {
             messageEntities = messageDomainService.listByIds(activeMessageIds);
 
             // 应用Token溢出策略
-            messageEntities = applyTokenOverflowStrategy(environment, contextEntity, messageEntities);
+            applyTokenOverflowStrategy(environment, contextEntity, messageEntities);
         } else {
             contextEntity = new ContextEntity();
             contextEntity.setSessionId(sessionId);
@@ -327,7 +326,7 @@ public class ConversationAppService {
      * @param environment 对话环境
      * @param contextEntity 上下文实体
      * @param messageEntities 消息实体列表 */
-    private List<MessageEntity> applyTokenOverflowStrategy(ChatContext environment, ContextEntity contextEntity,
+    private void applyTokenOverflowStrategy(ChatContext environment, ContextEntity contextEntity,
             List<MessageEntity> messageEntities) {
 
         LLMModelConfig llmModelConfig = environment.getLlmModelConfig();
@@ -344,7 +343,6 @@ public class ConversationAppService {
         tokenOverflowConfig.setStrategyType(strategyType);
         tokenOverflowConfig.setMaxTokens(llmModelConfig.getMaxTokens());
         tokenOverflowConfig.setSummaryThreshold(llmModelConfig.getSummaryThreshold());
-        tokenOverflowConfig.setReserveRatio(llmModelConfig.getReserveRatio());
 
         // 设置提供商配置
         org.lucas.domain.llm.model.config.ProviderConfig providerConfig = provider.getConfig();
@@ -353,10 +351,10 @@ public class ConversationAppService {
 
         // 处理Token
         TokenProcessResult result = tokenDomainService.processMessages(tokenMessages, tokenOverflowConfig);
-        List<TokenMessage> retainedMessages = new ArrayList<>(tokenMessages);
+
         // 更新上下文
         if (result.isProcessed()) {
-            retainedMessages = result.getRetainedMessages();
+            List<TokenMessage> retainedMessages = result.getRetainedMessages();
             List<String> retainedMessageIds = retainedMessages.stream().map(TokenMessage::getId)
                     .collect(Collectors.toList());
 
@@ -368,10 +366,6 @@ public class ConversationAppService {
 
             contextEntity.setActiveMessages(retainedMessageIds);
         }
-        Set<String> retainedMessageIdSet = retainedMessages.stream().map(TokenMessage::getId)
-                .collect(Collectors.toSet());
-        return messageEntities.stream().filter(message -> retainedMessageIdSet.contains(message.getId()))
-                .collect(Collectors.toList());
     }
 
     /** 消息实体转换为token消息 */
@@ -382,7 +376,6 @@ public class ConversationAppService {
             tokenMessage.setRole(message.getRole().name());
             tokenMessage.setContent(message.getContent());
             tokenMessage.setTokenCount(message.getTokenCount());
-            tokenMessage.setBodyTokenCount(message.getBodyTokenCount());
             tokenMessage.setCreatedAt(message.getCreatedAt());
             return tokenMessage;
         }).collect(Collectors.toList());
