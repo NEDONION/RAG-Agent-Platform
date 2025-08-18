@@ -209,10 +209,10 @@ export function RecommendedRagsSection() {
             <span className="bg-green-50 p-1.5 rounded-md text-green-500 mr-2">
               <Store className="h-5 w-5" />
             </span>
-            推荐知识库
+            Recommended Knowledge Base
           </h2>
           <p className="text-sm text-muted-foreground mt-1">
-            发现并安装其他用户分享的优质知识库
+            Discover and install high-quality knowledge bases shared by other users
           </p>
         </div>
       </div>
@@ -225,14 +225,14 @@ export function RecommendedRagsSection() {
               <Store className="h-5 w-5 text-green-500" />
             </div>
             <div>
-              <h3 className="font-medium text-lg">探索知识库市场</h3>
-              <p className="text-sm text-muted-foreground">发现更多优质知识库，扩展您的AI知识能力</p>
+              <h3 className="font-medium text-lg">Explore the Knowledge Base Marketplace</h3>
+              <p className="text-sm text-muted-foreground">Discover more high-quality knowledge bases</p>
             </div>
           </div>
           <Button asChild className="shadow-sm">
             <Link href="/knowledge?tab=recommended">
               <Search className="mr-2 h-4 w-4" />
-              浏览全部
+              View All
             </Link>
           </Button>
         </div>
@@ -244,7 +244,7 @@ export function RecommendedRagsSection() {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
             type="search"
-            placeholder="搜索知识库..."
+            placeholder="Search the Knowledge Base..."
             className="pl-10 pr-10"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -257,24 +257,24 @@ export function RecommendedRagsSection() {
               onClick={clearSearch}
             >
               <X className="h-4 w-4" />
-              <span className="sr-only">清除搜索</span>
+              <span className="sr-only">Clear Search</span>
             </Button>
           )}
         </div>
         <Select value={sortBy} onValueChange={setSortBy}>
           <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="排序方式" />
+            <SelectValue placeholder="sort by" />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="publishedAt">
               <div className="flex items-center gap-2">
                 <TrendingUp className="h-4 w-4" />
-                最新发布
+                Latest Releases
               </div>
             </SelectItem>
-            <SelectItem value="installCount">安装数量</SelectItem>
-            <SelectItem value="fileCount">文件数量</SelectItem>
-            <SelectItem value="rating">评分</SelectItem>
+            <SelectItem value="installCount">Number of installations</SelectItem>
+            <SelectItem value="fileCount">Number of files</SelectItem>
+            <SelectItem value="rating">Rating</SelectItem>
           </SelectContent>
         </Select>
       </div>

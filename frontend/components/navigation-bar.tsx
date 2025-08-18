@@ -38,11 +38,11 @@ const navItems = [
     href: "/knowledge",
     icon: Database,
   },
-  {
-    name: "Tool Market",
-    href: "/tools",
-    icon: Wrench,
-  },
+  // {
+  //   name: "Tool Market",
+  //   href: "/tools",
+  //   icon: Wrench,我安装的知识库
+  // },
 ]
 
 export function NavigationBar() {
