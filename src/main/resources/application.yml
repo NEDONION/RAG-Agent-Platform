@@ -53,8 +53,8 @@ spring:
 # MyBatis-Plus配置
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml
-  type-aliases-package: org.xhy.domain
-  type-handlers-package: org.xhy.infrastructure.converter
+  type-aliases-package: org.lucas.domain
+  type-handlers-package: org.lucas.infrastructure.converter
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
@@ -69,7 +69,7 @@ mybatis-plus:
 logging:
   level:
     root: info
-    org.xhy: debug
+    org.lucas: debug
   file:
     name: logs/agent-x.log
 mail:
