@@ -24,22 +24,22 @@ import { useBalance } from "@/contexts/account-context"
 
 const navItems = [
   {
-    name: "探索",
+    name: "Explore",
     href: "/explore",
     icon: Search,
   },
   {
-    name: "工作室",
+    name: "Workspace",
     href: "/studio",
     icon: FileText,
   },
   {
-    name: "知识库",
+    name: "Knowledge",
     href: "/knowledge",
     icon: Database,
   },
   {
-    name: "工具市场",
+    name: "Tool Market",
     href: "/tools",
     icon: Wrench,
   },
@@ -63,10 +63,10 @@ export function NavigationBar() {
         if (response.code === 200) {
           setUserInfo(response.data)
         } else {
-          console.error("获取用户信息失败:", response.message)
+          console.error("Failed to fetch user details:", response.message)
         }
       } catch (error) {
-        console.error("获取用户信息错误:", error)
+        console.error("Error in fetching user details:", error)
       } finally {
         setLoading(false)
       }
@@ -98,8 +98,8 @@ export function NavigationBar() {
     
     // 显示退出成功提示
     toast({
-      title: "成功",
-      description: "退出登录成功"
+      title: "Success",
+      description: "Logout successful"
     })
     
     // 跳转到登录页
@@ -143,7 +143,7 @@ export function NavigationBar() {
         </Sheet>
         <Link href="/" className="mr-6 flex items-center space-x-2">
           <Home className="h-6 w-6 text-blue-600" />
-          <span className="hidden font-bold sm:inline-block">AgentX</span>
+          <span className="hidden font-bold sm:inline-block">RAG Agent Platform</span>
         </Link>
         <div className="flex flex-1 items-center justify-between">
           <nav className="flex items-center space-x-6">
@@ -185,7 +185,7 @@ export function NavigationBar() {
                   </Avatar>
                   <div>
                     <div className="font-medium">
-                      {loading ? "加载中..." : (userInfo?.nickname || "未知用户")}
+                      {loading ? "Loading..." : (userInfo?.nickname || "Unknown user")}
                     </div>
                     {userInfo?.email && (
                       <div className="text-sm text-muted-foreground">
@@ -198,7 +198,7 @@ export function NavigationBar() {
                 <DropdownMenuItem className="cursor-default">
                   <Wallet className="mr-2 h-4 w-4" />
                   <div className="flex items-center justify-between w-full">
-                    <span>账户余额</span>
+                    <span>Account balance</span>
                     <span className="font-medium text-green-600">{formatAmount(balance)}</span>
                   </div>
                 </DropdownMenuItem>
@@ -206,55 +206,55 @@ export function NavigationBar() {
                 <DropdownMenuItem asChild>
                   <Link href="/settings/profile">
                     <Settings className="mr-2 h-4 w-4" />
-                    个人设置
+                    Personal Settings
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link href="/settings/general">
                     <Settings className="mr-2 h-4 w-4" />
-                    通用设置
+                    General Model Settings
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/settings/billing">
-                    <Settings className="mr-2 h-4 w-4" />
-                    账户与计费
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/settings/pricing">
-                    <Tag className="mr-2 h-4 w-4" />
-                    价格说明
-                  </Link>
-                </DropdownMenuItem>
+                {/*<DropdownMenuItem asChild>*/}
+                {/*  <Link href="/settings/billing">*/}
+                {/*    <Settings className="mr-2 h-4 w-4" />*/}
+                {/*    账户与计费*/}
+                {/*  </Link>*/}
+                {/*</DropdownMenuItem>*/}
+                {/*<DropdownMenuItem asChild>*/}
+                {/*  <Link href="/settings/pricing">*/}
+                {/*    <Tag className="mr-2 h-4 w-4" />*/}
+                {/*    价格说明*/}
+                {/*  </Link>*/}
+                {/*</DropdownMenuItem>*/}
                 <DropdownMenuItem asChild>
                   <Link href="/settings/api-keys">
                     <Settings className="mr-2 h-4 w-4" />
-                    API 密钥管理
+                    API Keys
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link href="/settings/providers">
                     <Settings className="mr-2 h-4 w-4" />
-                    服务提供商
+                    Model Providers
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/traces">
-                    <Activity className="mr-2 h-4 w-4" />
-                    执行追踪
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/settings/orders">
-                    <Package className="mr-2 h-4 w-4" />
-                    我的订单
-                  </Link>
-                </DropdownMenuItem>
+                {/*<DropdownMenuItem asChild>*/}
+                {/*  <Link href="/traces">*/}
+                {/*    <Activity className="mr-2 h-4 w-4" />*/}
+                {/*    执行追踪*/}
+                {/*  </Link>*/}
+                {/*</DropdownMenuItem>*/}
+                {/*<DropdownMenuItem asChild>*/}
+                {/*  <Link href="/settings/orders">*/}
+                {/*    <Package className="mr-2 h-4 w-4" />*/}
+                {/*    我的订单*/}
+                {/*  </Link>*/}
+                {/*</DropdownMenuItem>*/}
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onSelect={handleLogout}>
                   <LogOut className="mr-2 h-4 w-4" />
-                  退出登录
+                  Log out
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

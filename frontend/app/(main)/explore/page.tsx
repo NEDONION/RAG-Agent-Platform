@@ -50,16 +50,16 @@ export default function ExplorePage() {
       } else {
         setError(response.message)
         toast({
-          title: "获取助理列表失败",
+          title: "Failed to get assistant list",
           description: response.message,
           variant: "destructive",
         })
       }
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : "未知错误"
+      const errorMessage = error instanceof Error ? error.message : "Unknown error"
       setError(errorMessage)
       toast({
-        title: "获取助理列表失败",
+        title: "Failed to get assistant list",
         description: errorMessage,
         variant: "destructive",
       })
@@ -85,7 +85,7 @@ export default function ExplorePage() {
       }
     } catch (error) {
       // 错误已由withToast处理
-      console.error("添加助理到工作区失败:", error)
+      console.error("Failed to add assistant to Workspace:", error)
     } finally {
       setAddingAgentId(null)
     }
@@ -112,8 +112,8 @@ export default function ExplorePage() {
       <div className="flex-1 overflow-auto">
         <div className="container py-6 px-4">
           <div className="mb-6">
-            <h1 className="text-2xl font-bold tracking-tight text-blue-600">探索 AgentX 的应用</h1>
-            <p className="text-muted-foreground mt-1">使用这些模板应用程序，或根据模板自定义您自己的应用程序。</p>
+            <h1 className="text-2xl font-bold tracking-tight text-blue-600">Explore Agent Apps</h1>
+            <p className="text-muted-foreground mt-1">Use these template Apps, or customize your own Apps based on the templates.</p>
           </div>
 
           <Tabs defaultValue="推荐" className="space-y-6" value={activeTab} onValueChange={setActiveTab}>
@@ -147,7 +147,7 @@ export default function ExplorePage() {
                 <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                 <Input
                   type="search"
-                  placeholder="搜索..."
+                  placeholder="Search..."
                   className="pl-8 w-full md:w-[250px]"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
@@ -179,7 +179,7 @@ export default function ExplorePage() {
                   <div className="text-center py-10">
                     <div className="text-red-500 mb-4">{error}</div>
                     <Button variant="outline" onClick={() => window.location.reload()}>
-                      重试
+                      Retry
                     </Button>
                   </div>
                 ) : getFilteredAgents(tab).length === 0 ? (

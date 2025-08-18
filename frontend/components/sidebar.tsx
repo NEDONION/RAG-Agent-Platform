@@ -85,11 +85,11 @@ function WorkspaceItem({ id, name, icon, avatar, onClick }: WorkspaceItemProps) 
         // Refresh the sidebar
         window.location.reload()
       } else {
-        throw new Error(response.message || "删除失败")
+        throw new Error(response.message || "Deletion failed")
       }
     } catch (error) {
-      console.error("删除工作区助理错误:", error)
-      alert("删除失败: " + (error instanceof Error ? error.message : "未知错误"))
+      console.error("Deleting Workspace Assistant Errors:", error)
+      alert("Deletion failed: " + (error instanceof Error ? error.message : "Unknown error"))
     } finally {
       setIsDeleting(false)
       setShowDeleteDialog(false)
@@ -112,7 +112,7 @@ function WorkspaceItem({ id, name, icon, avatar, onClick }: WorkspaceItemProps) 
       } as Agent)
       setShowModelDialog(true)
     } catch (error) {
-      console.error("获取助理详情失败:", error)
+      console.error("Failed to fetch assistant details:", error)
     }
   }
   
@@ -150,17 +150,17 @@ function WorkspaceItem({ id, name, icon, avatar, onClick }: WorkspaceItemProps) 
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="h-7 w-7">
               <MoreHorizontal className="h-4 w-4" />
-              <span className="sr-only">操作</span>
+              <span className="sr-only">Operation</span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem onClick={handleOpenModelSettings}>
               <Settings className="mr-2 h-4 w-4" />
-              <span>设置模型</span>
+              <span>Setting up the Model</span>
             </DropdownMenuItem>
             <DropdownMenuItem className="text-red-600" onClick={handleDeleteWorkspace}>
               <Trash2 className="mr-2 h-4 w-4" />
-              <span>从工作区移除</span>
+              <span>Remove from Workspace</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -297,7 +297,7 @@ export function Sidebar() {
         setAgents(response.data)
       }
     } catch (error) {
-      console.error("加载工作区Agent失败:", error)
+      console.error("Failed to load the workspace agent:", error)
     } finally {
       setLoading(false)
     }
@@ -316,19 +316,19 @@ export function Sidebar() {
         await loadWorkspaceAgents()
       }
     } catch (error) {
-      console.error("移除Agent失败:", error)
+      console.error("Failed to remove the agent:", error)
     }
   }
 
   // Create sidebar items with real agent data
   const sidebarItems: SidebarItem[] = [
     {
-      title: "探索",
+      title: "Explore",
       icon: Compass,
       href: "/explore",
     },
     {
-      title: "工作区",
+      title: "Workspace",
       icon: FolderOpen,
       children: loading
         ? []

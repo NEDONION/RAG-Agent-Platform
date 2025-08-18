@@ -160,7 +160,7 @@ function renderAgentList(agents: AgentVersion[], loading: boolean, error: string
       <div className="text-center py-10">
         <div className="text-red-500 mb-4">{error}</div>
         <Button variant="outline" onClick={() => window.location.reload()}>
-          重试
+          Retry
         </Button>
       </div>
     )
@@ -170,8 +170,8 @@ function renderAgentList(agents: AgentVersion[], loading: boolean, error: string
     return (
       <div className="text-center py-16 border rounded-lg bg-gray-50">
         <Search className="h-12 w-12 mx-auto text-gray-400 mb-4" />
-        <h3 className="text-lg font-medium mb-2">未找到助理</h3>
-        <p className="text-muted-foreground mb-6">尝试使用不同的搜索词或浏览全部助理</p>
+        <h3 className="text-lg font-medium mb-2">No assistant found</h3>
+        <p className="text-muted-foreground mb-6">Try using different search terms or browse all assistants</p>
       </div>
     )
   }

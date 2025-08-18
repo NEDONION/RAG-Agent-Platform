@@ -3,7 +3,9 @@
 @tailwind utilities;
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+  Roboto, "Noto Sans", Ubuntu, Cantarell, "Helvetica Neue",
+  Arial, sans-serif, "Apple Color Emoji","Segoe UI Emoji";
 }
 
 @layer utilities {
