@@ -1,0 +1,55 @@
+package org.lucas.domain.conversation.service;
+
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import java.time.LocalDateTime;
+import java.util.List;
+import org.springframework.stereotype.Service;
+import org.lucas.domain.conversation.model.ContextEntity;
+import org.lucas.domain.conversation.model.MessageEntity;
+import org.lucas.domain.conversation.repository.ContextRepository;
+import org.lucas.domain.conversation.repository.MessageRepository;
+
+@Service
+public class MessageDomainService {
+
+    private final MessageRepository messageRepository;
+
+    private final ContextRepository contextRepository;
+
+    public MessageDomainService(MessageRepository messageRepository, ContextRepository contextRepository) {
+        this.messageRepository = messageRepository;
+        this.contextRepository = contextRepository;
+    }
+
+    public List<MessageEntity> listByIds(List<String> ids) {
+        return messageRepository.selectByIds(ids);
+    }
+
+    /** 保存消息并且更新消息到上下文 */
+    public void saveMessageAndUpdateContext(List<MessageEntity> messageEntities, ContextEntity contextEntity) {
+        if (messageEntities == null || messageEntities.isEmpty()) {
+            return;
+        }
+        for (MessageEntity messageEntity : messageEntities) {
+            messageEntity.setId(null);
+            messageEntity.setCreatedAt(LocalDateTime.now());
+        }
+        messageRepository.insert(messageEntities);
+        contextEntity.getActiveMessages().addAll(messageEntities.stream().map(MessageEntity::getId).toList());
+        contextRepository.insertOrUpdate(contextEntity);
+    }
+
+    /** 保存消息 */
+    public void saveMessage(List<MessageEntity> messageEntities) {
+        messageRepository.insert(messageEntities);
+    }
+
+    public void updateMessage(MessageEntity message) {
+        messageRepository.updateById(message);
+    }
+
+    public boolean isFirstConversation(String sessionId) {
+        return messageRepository
+                .selectCount(Wrappers.<MessageEntity>lambdaQuery().eq(MessageEntity::getSessionId, sessionId)) <= 3;
+    }
+}
