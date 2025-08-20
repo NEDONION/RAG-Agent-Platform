@@ -4,7 +4,9 @@ RAG Agent Platform is a multi-tenant agent SaaS platform. Built on LLMs, RAG, an
 
 面向多租户的智能体 SaaS平台。基于 LLM、RAG 与 MCP，您可搭建知识库与检索增强链路，快速创建和编排 Agent/LLM 机器人，并一键接入、切换与配置各类模型服务商。
 
-![](https://raw.githubusercontent.com/NEDONION/my-pics-space/main/20250820152052.png)
+![](https://raw.githubusercontent.com/NEDONION/my-pics-space/main/20250820155212.png)
+
+![](https://raw.githubusercontent.com/NEDONION/my-pics-space/main/20250820155154.png)
 
 ![](https://raw.githubusercontent.com/NEDONION/my-pics-space/main/20250820152009.png)
 
