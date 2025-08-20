@@ -25,8 +25,8 @@ export function handleApiResponse<T>(
   const {
     showSuccessToast = true,
     showErrorToast = true,
-    successTitle = "操作成功",
-    errorTitle = "操作失败"
+    successTitle = "Operation successful",
+    errorTitle = "Operation failed"
   } = options;
 
   // 判断响应是否成功 (通常是 code === 200)
@@ -70,7 +70,7 @@ export function withToast<T extends (...args: any[]) => Promise<ApiResponse<any>
       // 处理异常情况
       if (options.showErrorToast) {
         toast({
-          description: error instanceof Error ? error.message : "未知错误",
+          description: error instanceof Error ? error.message : "Unknown error",
           variant: "destructive",
         });
       }

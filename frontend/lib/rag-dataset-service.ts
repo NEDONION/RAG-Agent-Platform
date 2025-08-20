@@ -415,8 +415,8 @@ export const getAllDatasetFilesWithToast = withToast(getAllDatasetFiles, {
 })
 
 export const deleteFileWithToast = withToast(deleteFile, {
-  successTitle: "删除文件成功",
-  errorTitle: "删除文件失败"
+  successTitle: "File deleted successfully",
+  errorTitle: "Failed to delete file"
 })
 
 // ========== 新增API方法的withToast包装器 ==========

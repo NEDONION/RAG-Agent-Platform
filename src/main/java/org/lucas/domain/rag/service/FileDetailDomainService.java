@@ -10,6 +10,9 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.dromara.x.file.storage.core.FileInfo;
 import org.dromara.x.file.storage.core.FileStorageService;
+import org.lucas.application.rag.service.RagQaDatasetAppService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.lucas.domain.rag.constant.FileProcessingEventEnum;
 import org.lucas.domain.rag.constant.FileProcessingStatusEnum;
@@ -24,7 +27,7 @@ import org.lucas.infrastructure.exception.BusinessException;
  */
 @Service
 public class FileDetailDomainService {
-
+    private static final Logger log = LoggerFactory.getLogger(FileDetailDomainService.class);
     private final FileStorageService fileStorageService;
     private final FileDetailRepository fileDetailRepository;
     private final FileProcessingStateMachineService stateMachineService;
@@ -210,7 +213,7 @@ public class FileDetailDomainService {
                 fileStorageService.delete(file.getUrl());
             } catch (Exception e) {
                 // 记录日志但继续删除
-                // log.warn("删除存储文件失败: {}", file.getUrl(), e);
+                 log.warn("删除存储文件失败: {}", file.getUrl(), e);
             }
         }
 

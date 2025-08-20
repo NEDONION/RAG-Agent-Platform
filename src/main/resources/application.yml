@@ -97,7 +97,7 @@ embedding:
 
 rerank:
   name: OpenAI
-  api-key: ${SILICONFLOW_API_KEY}
+  api-key: ${SILICONFLOW_API_KEY:sk-zmkzwjjsvxydrkclmefgintzpqqaxmuipyccjoyikazbdjnx}
   api-url: ${SILICONFLOW_API_URL_RERANK:https://api.siliconflow.com/v1/rerank}
   model: ${SILICONFLOW_MODEL_RERANK_MODEL:Qwen/Qwen3-Reranker-4B}
   timeout: ${SILICONFLOW_TIMEOUT:30000}
@@ -110,10 +110,10 @@ dromara:
     amazon-s3: # 0.0.7 及以前的版本，配置名称是：aws-s3
       - platform: amazon-s3-1 # 存储平台标识
         enable-storage: true # 启用存储
-        access-key: ${S3_SECRET_ID}
-        secret-key: ${S3_SECRET_KEY}
-        region: ${S3_REGION} # 与 end-point 参数至少填一个
-        end-point: ${S3_ENDPOINT} # 与 region 参数至少填一个
-        bucket-name: ${S3_BUCKET_NAME}
-        domain: ${S3_DOMAIN} # 访问域名，注意“/”结尾，例如：https://abc.hn-bkt.clouddn.com/
+        access-key: ${S3_SECRET_ID:ETs8pqIw2Hdv0P00ggodMvlJea5jFW0ZNcAWCkHh}
+        secret-key: ${S3_SECRET_KEY:pNJ5Bv-kpOwvdSiIclkqwawmSA9O97hGt9nSCBnW}
+        region: ${S3_REGION:cn-south-1} # 与 end-point 参数至少填一个
+        end-point: ${S3_ENDPOINT:https://s3.cn-south-1.qiniucs.com} # 与 region 参数至少填一个
+        bucket-name: ${S3_BUCKET_NAME:agentx-test-lucas}
+        domain: ${S3_DOMAIN:https://agentx-test-lucas.s3.cn-south-1.qiniucs.com/} # 访问域名，注意“/”结尾，例如：https://abc.hn-bkt.clouddn.com/
         base-path: s3/ # 基础路径
