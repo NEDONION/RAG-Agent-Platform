@@ -56,7 +56,7 @@ export function ChatInputArea({
               onClick={onClear}
               disabled={isLoading}
             >
-              清空对话
+              Clear conversation
             </Button>
           </div>
         )}
@@ -67,7 +67,7 @@ export function ChatInputArea({
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="输入您的问题..."
+            placeholder="Enter your question..."
             className="flex-1 min-h-[60px] max-h-[120px] resize-none"
             disabled={isLoading || disabled}
           />
@@ -95,7 +95,7 @@ export function ChatInputArea({
         </div>
         
         <p className="text-xs text-muted-foreground mt-2">
-          按 Enter 发送，Shift + Enter 换行
+          Press Enter to send, Shift + Enter to wrap
         </p>
       </div>
     </div>

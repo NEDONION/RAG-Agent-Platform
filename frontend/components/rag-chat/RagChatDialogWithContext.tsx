@@ -79,7 +79,7 @@ function RagChatDialogInner({ open, onOpenChange, dataset }: RagChatDialogInnerP
       title={
         <div className="flex items-center gap-3">
           <MessageSquare className="h-5 w-5" />
-          <span>RAG 智能问答</span>
+          <span>RAG Smart Q&A</span>
           <Badge variant="secondary">{dataset.name}</Badge>
         </div>
       }

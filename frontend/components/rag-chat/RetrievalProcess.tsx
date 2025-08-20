@@ -28,14 +28,14 @@ export function RetrievalProcess({
       <div className="space-y-2">
         <div className="flex items-center gap-2">
           <FileSearch className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-          <span className="text-sm font-medium">文档检索</span>
+          <span className="text-sm font-medium">Document Retrieval</span>
           {retrieval.status === 'end' && retrieval.documents && (
             <Badge variant="secondary" className="text-xs">
-              找到 {(() => {
+              Found {(() => {
                 // 计算唯一文件数量
                 const uniqueFileIds = new Set(retrieval.documents.map(doc => doc.fileId));
                 return uniqueFileIds.size;
-              })()} 个文件
+              })()} files.
             </Badge>
           )}
         </div>

@@ -120,7 +120,7 @@ export async function ragStreamChatByUserRag(
                 const retrievalData = {
                   type: 'retrieval',
                   status: 'end',
-                  message: message.content || '检索完成',
+                  message: message.content || 'Search completed',
                   documents: message.payload ? JSON.parse(message.payload) : [],
                   retrievedCount: 0
                 };

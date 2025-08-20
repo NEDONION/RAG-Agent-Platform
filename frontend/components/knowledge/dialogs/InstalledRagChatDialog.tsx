@@ -91,7 +91,7 @@ export function InstalledRagChatDialog({
       title={
         <div className="flex items-center gap-3">
           <MessageSquare className="h-5 w-5" />
-          <span>RAG 智能问答</span>
+          <span>RAG Smart Q&A</span>
           <Badge variant="secondary">{userRag.name}</Badge>
           <Badge variant="outline" className="text-xs">
             v{userRag.version}

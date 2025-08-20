@@ -58,9 +58,9 @@ export function ChatMessageList({
             <div className="rounded-full bg-primary/10 p-4 mb-4">
               <Bot className="h-8 w-8 text-primary" />
             </div>
-            <h3 className="text-lg font-semibold mb-2">开始对话</h3>
+            <h3 className="text-lg font-semibold mb-2">Start a conversation</h3>
             <p className="text-muted-foreground max-w-sm">
-              我可以帮您快速检索和理解知识库中的内容。请输入您的问题开始对话。
+              I can help you quickly search and understand the content in the knowledge base. Please enter your question to start the conversation.
             </p>
           </div>
         ) : (

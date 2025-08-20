@@ -55,7 +55,7 @@ export function CreatedRagCard({
             <div className="w-[calc(100%-60px)] min-w-0">
               <h3 className="font-semibold line-clamp-1 truncate text-ellipsis overflow-hidden whitespace-nowrap max-w-full">{dataset.name}</h3>
               <p className="text-sm text-muted-foreground mt-1">
-                更新于 {formatDate(dataset.updatedAt)}
+                Updated at {formatDate(dataset.updatedAt)}
               </p>
             </div>
           </Link>
@@ -63,26 +63,26 @@ export function CreatedRagCard({
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="icon" className="h-8 w-8">
                 <MoreHorizontal className="h-4 w-4" />
-                <span className="sr-only">更多选项</span>
+                <span className="sr-only">More options</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               {onEdit && (
                 <DropdownMenuItem onClick={() => onEdit(dataset)}>
                   <Edit className="mr-2 h-4 w-4" />
-                  编辑
+                  Edit
                 </DropdownMenuItem>
               )}
               {onPublish && (
                 <DropdownMenuItem onClick={() => onPublish(dataset)}>
                   <Share className="mr-2 h-4 w-4" />
-                  发布到市场
+                  Release to the market
                 </DropdownMenuItem>
               )}
               {onViewHistory && (
                 <DropdownMenuItem onClick={() => onViewHistory(dataset)}>
                   <History className="mr-2 h-4 w-4" />
-                  版本历史
+                  Version History
                 </DropdownMenuItem>
               )}
               {onDelete && (
@@ -93,7 +93,7 @@ export function CreatedRagCard({
                     onClick={() => onDelete(dataset)}
                   >
                     <Trash className="mr-2 h-4 w-4" />
-                    删除
+                    Delete
                   </DropdownMenuItem>
                 </>
               )}
@@ -104,14 +104,14 @@ export function CreatedRagCard({
       <CardContent className="pt-0">
         <Link href={`/knowledge/${dataset.id}`} className="block" style={{ cursor: 'pointer' }}>
           <div className="min-h-[40px] mb-3 line-clamp-2 text-sm">
-            {dataset.description || "无描述"}
+            {dataset.description || "No description"}
           </div>
           <div className="flex items-center gap-2">
             <Badge variant="secondary">
-              {dataset.fileCount} 个文件
+              {dataset.fileCount} Files
             </Badge>
             <Badge variant="outline">
-              原始数据集
+              Raw Dataset
             </Badge>
           </div>
         </Link>
