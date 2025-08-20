@@ -32,7 +32,7 @@ export function getFileStatusConfig(
     switch (statusEnum) {
       case FileProcessingStatusEnum.UPLOADED:
         statusConfig = {
-          text: "已上传",
+          text: "Uploaded",
           variant: "outline",
           color: "text-yellow-600 border-yellow-300",
           iconType: "clock"
@@ -42,7 +42,7 @@ export function getFileStatusConfig(
 
       case FileProcessingStatusEnum.OCR_PROCESSING:
         statusConfig = {
-          text: "OCR处理中",
+          text: "OCR processing",
           variant: "outline",
           color: "text-blue-600 border-blue-300",
           iconType: "loading"
@@ -52,7 +52,7 @@ export function getFileStatusConfig(
 
       case FileProcessingStatusEnum.OCR_COMPLETED:
         statusConfig = {
-          text: "OCR处理完成",
+          text: "OCR completed",
           variant: "secondary",
           color: "text-green-600 bg-green-50 border-green-300",
           iconType: "check"
@@ -63,7 +63,7 @@ export function getFileStatusConfig(
 
       case FileProcessingStatusEnum.EMBEDDING_PROCESSING:
         statusConfig = {
-          text: "向量化处理中",
+          text: "Vectorizing",
           variant: "outline",
           color: "text-blue-600 border-blue-300",
           iconType: "loading"
@@ -73,7 +73,7 @@ export function getFileStatusConfig(
 
       case FileProcessingStatusEnum.COMPLETED:
         statusConfig = {
-          text: "处理完成",
+          text: "Completed",
           variant: "default",
           color: "text-green-600 bg-green-50 border-green-300",
           iconType: "check"
@@ -83,7 +83,7 @@ export function getFileStatusConfig(
 
       case FileProcessingStatusEnum.OCR_FAILED:
         statusConfig = {
-          text: "OCR处理失败",
+          text: "OCR failed",
           variant: "destructive",
           color: "text-red-600 border-red-300",
           iconType: "alert"
@@ -93,7 +93,7 @@ export function getFileStatusConfig(
 
       case FileProcessingStatusEnum.EMBEDDING_FAILED:
         statusConfig = {
-          text: "向量化处理失败",
+          text: "Vectorization failed",
           variant: "destructive",
           color: "text-red-600 border-red-300",
           iconType: "alert"
@@ -104,7 +104,7 @@ export function getFileStatusConfig(
 
       default:
         statusConfig = {
-          text: "未知状态",
+          text: "Unknown status",
           variant: "destructive",
           color: "text-red-600",
           iconType: "alert"
@@ -114,7 +114,7 @@ export function getFileStatusConfig(
     // 兼容旧的状态字段
     if (file.isInitialize === 0) {
       statusConfig = {
-        text: "待初始化",
+        text: "pre-initialized",
         variant: "outline",
         color: "text-yellow-600 border-yellow-300",
         iconType: "clock"
@@ -122,7 +122,7 @@ export function getFileStatusConfig(
       canStartOcr = true;
     } else if (file.isInitialize === 1) {
       statusConfig = {
-        text: "已初始化",
+        text: "Initialized",
         variant: "secondary",
         color: "text-green-600 bg-green-50 border-green-300",
         iconType: "check"
@@ -130,7 +130,7 @@ export function getFileStatusConfig(
       canStartEmbedding = file.isEmbedding === 0;
     } else {
       statusConfig = {
-        text: "处理中",
+        text: "Processing",
         variant: "outline",
         color: "text-blue-600 border-blue-300",
         iconType: "loading"
@@ -156,7 +156,7 @@ export function getStatusDescription(
   }
 
   if (!statusEnum) {
-    return "未知状态";
+    return "Unknown status";
   }
 
   const statusMap = {
@@ -169,5 +169,5 @@ export function getStatusDescription(
     [FileProcessingStatusEnum.EMBEDDING_FAILED]: "向量化处理失败"
   };
 
-  return statusMap[statusEnum] || "未知状态";
+  return statusMap[statusEnum] || "Unknown status";
 } 

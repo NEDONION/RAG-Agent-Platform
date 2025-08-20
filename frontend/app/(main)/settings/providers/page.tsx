@@ -375,26 +375,26 @@ export default function ProvidersPage() {
     <div className="container py-6">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">服务商</h1>
-          <p className="text-muted-foreground">管理您的AI服务商和API密钥</p>
+          <h1 className="text-3xl font-bold tracking-tight">Model Provider</h1>
+          <p className="text-muted-foreground">Manage your Model Providers and API keys</p>
         </div>
         <Button className="flex items-center gap-2" onClick={openAddDialog}>
           <Plus className="h-4 w-4" />
-          添加服务商
+          Add a Model Provider
         </Button>
       </div>
       
       <Tabs defaultValue="全部" className="space-y-6" value={activeTab} onValueChange={setActiveTab}>
         <TabsList>
-          <TabsTrigger value="全部">全部</TabsTrigger>
-          <TabsTrigger value="官方服务">官方服务</TabsTrigger>
-          <TabsTrigger value="自定义服务">自定义服务</TabsTrigger>
+          <TabsTrigger value="全部">All</TabsTrigger>
+          <TabsTrigger value="官方服务">Official Providers</TabsTrigger>
+          <TabsTrigger value="自定义服务">Personal Providers</TabsTrigger>
         </TabsList>
         
         <TabsContent value="全部" className="space-y-6">
           {filteredProviders.length === 0 ? (
             <div className="text-center py-10 border rounded-md bg-gray-50">
-              <p className="text-muted-foreground">暂无服务商数据</p>
+              <p className="text-muted-foreground">No model providers data</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -416,7 +416,7 @@ export default function ProvidersPage() {
                             {provider.protocol}
                             {provider.isOfficial && (
                               <Badge variant="outline" className="ml-2 text-[10px]">
-                                官方
+                                Official
                               </Badge>
                             )}
                           </CardDescription>
@@ -427,17 +427,17 @@ export default function ProvidersPage() {
                           <DropdownMenuTrigger asChild onClick={(e) => e.stopPropagation()}>
                             <Button variant="ghost" size="icon" className="absolute top-2 right-2">
                               <MoreHorizontal className="h-4 w-4" />
-                              <span className="sr-only">打开菜单</span>
+                              <span className="sr-only">Open menu</span>
                             </Button>
                           </DropdownMenuTrigger>
                           <DropdownMenuContent align="end">
                             <DropdownMenuItem onClick={(e) => openEditDialog(provider, e)}>
                               <Edit className="mr-2 h-4 w-4" />
-                              编辑
+                              Edit
                             </DropdownMenuItem>
                             <DropdownMenuItem onClick={(e) => openDeleteConfirm(provider, e)}>
                               <Trash className="mr-2 h-4 w-4" />
-                              删除
+                              Delete
                             </DropdownMenuItem>
                             <DropdownMenuItem 
                               onClick={(e) => toggleProviderStatus(provider, e)}
@@ -446,12 +446,12 @@ export default function ProvidersPage() {
                               {provider.status ? (
                                 <>
                                   <PowerOff className="mr-2 h-4 w-4" />
-                                  禁用
+                                  Disable
                                 </>
                               ) : (
                                 <>
                                   <Power className="mr-2 h-4 w-4" />
-                                  启用
+                                  Enable
                                 </>
                               )}
                             </DropdownMenuItem>
@@ -462,21 +462,21 @@ export default function ProvidersPage() {
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-muted-foreground mb-3">
-                      {provider.description || "无描述"}
+                      {provider.description || "No description"}
                     </p>
                     <div className="flex flex-wrap gap-1 mt-2">
                       {provider.status ? (
                         <Badge variant="outline" className="bg-green-50 text-green-600 border-green-200">
-                          已启用
+                          Enabled
                         </Badge>
                       ) : (
                         <Badge variant="outline" className="bg-red-50 text-red-600 border-red-200">
-                          已禁用
+                          Disabled
                         </Badge>
                       )}
                       {provider.models && provider.models.length > 0 && (
                         <div className="w-full mt-2">
-                          <p className="text-xs text-muted-foreground mb-1">可用模型:</p>
+                          <p className="text-xs text-muted-foreground mb-1">Available Models:</p>
                           <div className="flex flex-wrap gap-1">
                             {provider.models.slice(0, 3).map((model, index) => (
                               <Badge key={index} variant="outline" className="bg-blue-50 text-blue-600 border-blue-200">
@@ -534,7 +534,7 @@ export default function ProvidersPage() {
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-muted-foreground mb-3">
-                      {provider.description || "无描述"}
+                      {provider.description || "No description"}
                     </p>
                     <div className="flex flex-wrap gap-1 mt-2">
                       {provider.status ? (
@@ -642,7 +642,7 @@ export default function ProvidersPage() {
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-muted-foreground mb-3">
-                      {provider.description || "无描述"}
+                      {provider.description || "No description"}
                     </p>
                     <div className="flex flex-wrap gap-1 mt-2">
                       {provider.status ? (
@@ -686,10 +686,10 @@ export default function ProvidersPage() {
           <DialogContent className="max-w-4xl max-h-[80vh] flex flex-col overflow-hidden">
             <DialogHeader>
               <DialogTitle className="flex justify-between items-center">
-                <span>服务商详情</span>
+                <span>Model Provider Details</span>
               </DialogTitle>
               <DialogDescription>
-                查看和管理服务商的详细信息和模型配置
+                View and manage provider details and model configurations
               </DialogDescription>
             </DialogHeader>
             
@@ -708,15 +708,15 @@ export default function ProvidersPage() {
                     <div className="flex items-center gap-2 mt-1">
                       <span className="text-sm text-muted-foreground">{selectedProvider.protocol}</span>
                       {selectedProvider.isOfficial && (
-                        <Badge variant="outline">官方</Badge>
+                        <Badge variant="outline">Official</Badge>
                       )}
                       {selectedProvider.status ? (
                         <Badge variant="outline" className="bg-green-50 text-green-600 border-green-200">
-                          已启用
+                          Enabled
                         </Badge>
                       ) : (
                         <Badge variant="outline" className="bg-red-50 text-red-600 border-red-200">
-                          已禁用
+                          Disabled
                         </Badge>
                       )}
                     </div>
@@ -763,9 +763,9 @@ export default function ProvidersPage() {
                 </div>
                 
                 <div className="space-y-2">
-                  <h4 className="font-medium">描述</h4>
+                  <h4 className="font-medium">Description</h4>
                   <p className="text-sm text-muted-foreground">
-                    {selectedProvider.description || "无描述"}
+                    {selectedProvider.description || "No description"}
                   </p>
                 </div>
                 
@@ -774,11 +774,11 @@ export default function ProvidersPage() {
                 {/* 模型列表 */}
                 <div className="flex-1 overflow-hidden flex flex-col">
                   <div className="flex justify-between items-center mb-2">
-                    <h3 className="text-lg font-semibold">模型列表</h3>
+                    <h3 className="text-lg font-semibold">Model List</h3>
                     {!selectedProvider.isOfficial && (
                       <Button variant="outline" size="sm" onClick={openAddModelDialog}>
                         <PlusCircle className="h-4 w-4 mr-1" />
-                        添加模型
+                        Add Model
                       </Button>
                     )}
                   </div>
@@ -786,7 +786,7 @@ export default function ProvidersPage() {
                   <ScrollArea className="flex-1">
                     {!selectedProvider.models || selectedProvider.models.length === 0 ? (
                       <div className="text-center py-6 text-muted-foreground">
-                        暂无模型{!selectedProvider.isOfficial && "，点击添加按钮创建模型"}
+                        No model yet{!selectedProvider.isOfficial && "，点击添加按钮创建模型"}
                       </div>
                     ) : (
                       <div className="space-y-2">
@@ -798,7 +798,7 @@ export default function ProvidersPage() {
                                 <div className="text-sm text-muted-foreground flex items-center space-x-2">
                                   <span>ID: {model.modelId}</span>
                                   <span>·</span>
-                                  <span>类型: {model.type}</span>
+                                  <span>Type: {model.type}</span>
                                 </div>
                                 {model.description && (
                                   <div className="text-sm mt-1">{model.description}</div>
@@ -866,14 +866,14 @@ export default function ProvidersPage() {
             
             <DialogFooter>
               <Button variant="outline" onClick={closeDetail}>
-                关闭
+                Close
               </Button>
               {!selectedProvider?.isOfficial && (
                 <Button 
                   onClick={() => selectedProvider && openEditDialog(selectedProvider)}
                   disabled={!selectedProvider}
                 >
-                  编辑配置
+                  Edit Configuration
                 </Button>
               )}
             </DialogFooter>
@@ -885,7 +885,7 @@ export default function ProvidersPage() {
       <Dialog open={deleteConfirmOpen} onOpenChange={setDeleteConfirmOpen}>
         <DialogContent className="max-w-md">
           <DialogHeader>
-            <DialogTitle>删除服务商</DialogTitle>
+            <DialogTitle>Delete Model Provider</DialogTitle>
             <DialogDescription>
               您确定要删除此服务商吗？此操作无法撤销。
             </DialogDescription>

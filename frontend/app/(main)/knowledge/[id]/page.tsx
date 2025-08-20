@@ -804,7 +804,7 @@ export default function DatasetDetailPage() {
                             <TableCell>
                               <div className="flex items-center gap-1">
                                 
-                                {(fileStatusDisplay.status.text === "处理完成" || fileStatusDisplay.status.text === "OCR处理完成") && (
+                                {(fileStatusDisplay.status.text === "Completed" || fileStatusDisplay.status.text === "OCR completed") && (
                                   <Button
                                     variant="ghost"
                                     size="icon"
