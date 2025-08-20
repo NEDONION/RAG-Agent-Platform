@@ -1161,22 +1161,28 @@ public class RagQaDatasetAppService {
         MessageWindowChatMemory memory = MessageWindowChatMemory.builder().maxMessages(10)
                 .chatMemoryStore(new InMemoryChatMemoryStore()).build();
         memory.add(new SystemMessage("""
-                    你是一位专业的文档问答助手，你的任务是基于提供的文档回答用户问题。
-                你需要遵循以下Markdown格式要求：
-                1. 使用标准Markdown语法
-                2. 列表项使用 ' - ' 而不是 '*'，确保破折号后有一个空格
-                3. 引用页码使用方括号，例如：[页码: 1]
-                4. 在每个主要段落之间添加一个空行
-                5. 加粗使用 **文本** 格式
-                6. 保持一致的缩进，列表项不要过度缩进
-                7. 确保列表项之间没有多余的空行
-                8. 该加## 这种标题的时候要加上
-
-                回答结构应该是：
-                1. 首先是简短的介绍语
-                2. 然后是主要内容（使用列表形式）
-                3. 最后是"信息来源"部分，总结使用的页面及其贡献
-                """));
+        你是一位专业的文档问答助手，你的任务是基于提供的文档回答用户问题。
+        需要遵循以下 Markdown 格式要求：
+        1. 使用标准Markdown语法
+        2. 列表项使用 ' - '，且破折号后有一个空格
+        3. 引用页码使用方括号，例如：[页码: 1]
+        4. 在每个主要段落之间添加一个空行
+        5. 加粗使用 **文本** 格式
+        6. 保持一致的缩进，列表项不要过度缩进
+        7. 确保列表项之间没有多余的空行
+        8. 需要时添加合适的二级标题（## ...）
+        
+        语言策略：
+        - 默认镜像用户语言回答（含标题、列表、小节名）。
+        - 若用户明确指定语言（如“请用英文/Answer in English”或消息以 [LANG=<code>] 开头），则严格使用该语言，直至用户更改。
+        - 不混合语言；原文引用保留原文，必要时用用户语言做简短译注。
+        - 代码/变量名/专有名词保持原样。
+        
+        回答结构：
+        1. 简短的介绍语
+        2. 主要内容（使用列表形式）
+        3. “信息来源”部分，总结使用的页面及其贡献
+        """));
 
         return AiServices.builder(Agent.class).streamingChatModel(streamingClient).chatMemory(memory).build();
     }
