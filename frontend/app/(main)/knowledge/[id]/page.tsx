@@ -510,15 +510,15 @@ export default function DatasetDetailPage() {
       <div className="container py-6">
         <div className="text-center py-10">
           <AlertCircle className="h-12 w-12 mx-auto text-red-500 mb-4" />
-          <div className="text-red-500 mb-4">{error || "数据集不存在"}</div>
+          <div className="text-red-500 mb-4">{error || "The dataset does not exist"}</div>
           <div className="flex gap-2 justify-center">
             <Button variant="outline" onClick={() => router.back()}>
               <ArrowLeft className="mr-2 h-4 w-4" />
-              返回
+              Return
             </Button>
             <Button variant="outline" onClick={loadDatasetDetail}>
               <RefreshCw className="mr-2 h-4 w-4" />
-              重试
+              Retry
             </Button>
           </div>
         </div>
@@ -536,7 +536,7 @@ export default function DatasetDetailPage() {
         <div>
           <h1 className="text-2xl font-bold tracking-tight">{dataset.name}</h1>
           <p className="text-muted-foreground">
-            <Link href="/knowledge" className="hover:underline">知识库</Link>
+            <Link href="/knowledge" className="hover:underline">Knowledge Base</Link>
             <span className="mx-2">/</span>
             <span>{dataset.name}</span>
           </p>
@@ -548,33 +548,33 @@ export default function DatasetDetailPage() {
         <div className="lg:col-span-1">
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">数据集信息</CardTitle>
+              <CardTitle className="text-lg">Dataset Details</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <label className="text-sm font-medium text-muted-foreground">名称</label>
+                <label className="text-sm font-medium text-muted-foreground">Name</label>
                 <p className="text-sm">{dataset.name}</p>
               </div>
               
               {dataset.description && (
                 <div>
-                  <label className="text-sm font-medium text-muted-foreground">描述</label>
+                  <label className="text-sm font-medium text-muted-foreground">Description</label>
                   <p className="text-sm">{dataset.description}</p>
                 </div>
               )}
               
               <div>
-                <label className="text-sm font-medium text-muted-foreground">文件数量</label>
-                <p className="text-sm">{dataset.fileCount} 个文件</p>
+                <label className="text-sm font-medium text-muted-foreground">Number of files</label>
+                <p className="text-sm">{dataset.fileCount} files</p>
               </div>
               
               <div>
-                <label className="text-sm font-medium text-muted-foreground">创建时间</label>
+                <label className="text-sm font-medium text-muted-foreground">Creation Timestamp</label>
                 <p className="text-sm">{formatDate(dataset.createdAt)}</p>
               </div>
               
               <div>
-                <label className="text-sm font-medium text-muted-foreground">更新时间</label>
+                <label className="text-sm font-medium text-muted-foreground">Update Timestamp</label>
                 <p className="text-sm">{formatDate(dataset.updatedAt)}</p>
               </div>
 
@@ -584,7 +584,7 @@ export default function DatasetDetailPage() {
                 <div>
                   <label className="text-sm font-medium text-muted-foreground mb-2 flex items-center gap-2">
                     <MessageSquare className="h-4 w-4" />
-                    智能问答
+                    Smart Q&A
                   </label>
                   <Button 
                     onClick={() => setShowRagChat(true)}
@@ -592,7 +592,7 @@ export default function DatasetDetailPage() {
                     className="w-full"
                   >
                     <MessageSquare className="mr-2 h-4 w-4" />
-                    开始对话
+                    Start a conversation
                   </Button>
                 </div>
 
@@ -600,11 +600,11 @@ export default function DatasetDetailPage() {
                 <div>
                   <label className="text-sm font-medium text-muted-foreground mb-2 flex items-center gap-2">
                     <FileSearch className="h-4 w-4" />
-                    文档搜索
+                    Search in Document
                   </label>
                   <div className="space-y-2">
                     <Textarea
-                      placeholder="输入问题进行文档搜索..."
+                      placeholder="Enter a question to search in document..."
                       value={ragSearchQuery}
                       onChange={(e) => setRagSearchQuery(e.target.value)}
                       className="min-h-[80px] resize-none"
@@ -619,12 +619,12 @@ export default function DatasetDetailPage() {
                         {isRagSearching ? (
                           <>
                             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                            搜索中...
+                            Searching...
                           </>
                         ) : (
                           <>
                             <Search className="mr-2 h-4 w-4" />
-                            搜索文档
+                            Search in Document
                           </>
                         )}
                       </Button>
@@ -653,7 +653,7 @@ export default function DatasetDetailPage() {
                   >
                     <span>
                       <Upload className="mr-2 h-4 w-4" />
-                      {isUploading ? "上传中..." : "上传文件"}
+                      {isUploading ? "Uploading..." : "Upload files"}
                     </span>
                   </Button>
                 </label>
@@ -666,7 +666,7 @@ export default function DatasetDetailPage() {
                   accept=".pdf,.doc,.docx,.txt,.md,.html,.json,.csv,.xlsx,.xls"
                 />
                 <p className="text-xs text-muted-foreground mt-2">
-                  支持 PDF、Word、文本等格式
+                  Support PDF, Word, text and other formats
                 </p>
               </div>
             </CardContent>
@@ -678,13 +678,13 @@ export default function DatasetDetailPage() {
           <Card>
             <CardHeader>
               <div className="flex items-center justify-between">
-                <CardTitle className="text-lg">文件列表</CardTitle>
+                <CardTitle className="text-lg">File List</CardTitle>
                 <div className="flex items-center gap-2">
                   <div className="relative">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <Input
                       type="search"
-                      placeholder="搜索文件..."
+                      placeholder="Search for files..."
                       className="pl-10 pr-10 w-64"
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
@@ -723,10 +723,10 @@ export default function DatasetDetailPage() {
                 <div className="text-center py-8">
                   <File className="h-12 w-12 mx-auto text-gray-400 mb-4" />
                   <h3 className="text-lg font-medium mb-2">
-                    {searchQuery ? "未找到匹配的文件" : "还没有上传任何文件"}
+                    {searchQuery ? "No matching files found" : "No files have been uploaded yet"}
                   </h3>
                   <p className="text-muted-foreground mb-4">
-                    {searchQuery ? "尝试使用不同的搜索词" : "上传文件开始构建您的知识库"}
+                    {searchQuery ? "Try using different search terms" : "Upload files to start building your knowledge base"}
                   </p>
                 </div>
               ) : (
@@ -735,12 +735,12 @@ export default function DatasetDetailPage() {
                     <TableHeader>
                       <TableRow>
                         <TableHead className="w-12"></TableHead>
-                        <TableHead>文件名</TableHead>
-                        <TableHead>大小</TableHead>
-                        <TableHead>处理状态</TableHead>
-                        <TableHead>处理进度</TableHead>
-                        <TableHead>上传时间</TableHead>
-                        <TableHead className="w-20">操作</TableHead>
+                        <TableHead>File Name</TableHead>
+                        <TableHead>Size</TableHead>
+                        <TableHead>Processing Status</TableHead>
+                        <TableHead>% Progress</TableHead>
+                        <TableHead>Upload Timestamp</TableHead>
+                        <TableHead className="w-20">Action</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -810,7 +810,7 @@ export default function DatasetDetailPage() {
                                     size="icon"
                                     className="h-8 w-8"
                                     onClick={() => setSelectedFileForUnits(file)}
-                                    title="查看语料"
+                                    title="View Segements"
                                   >
                                     <FileText className="h-4 w-4" />
                                   </Button>
@@ -820,7 +820,7 @@ export default function DatasetDetailPage() {
                                   size="icon"
                                   className="h-8 w-8"
                                   onClick={() => window.open(file.url, '_blank')}
-                                  title="下载文件"
+                                  title="Download File"
                                 >
                                   <Download className="h-4 w-4" />
                                 </Button>
@@ -829,7 +829,7 @@ export default function DatasetDetailPage() {
                                   size="icon"
                                   className="h-8 w-8 text-red-600 hover:text-red-700"
                                   onClick={() => setFileToDelete(file)}
-                                  title="删除文件"
+                                  title="Deleting File"
                                 >
                                   <Trash className="h-4 w-4" />
                                 </Button>
@@ -892,10 +892,10 @@ export default function DatasetDetailPage() {
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <BookOpen className="h-5 w-5" />
-              搜索结果
+              Search Results
             </DialogTitle>
             <DialogDescription>
-              针对问题 "{ragSearchQuery}" 的文档搜索结果
+              Document search results regarding to "{ragSearchQuery}"
             </DialogDescription>
           </DialogHeader>
           
@@ -903,14 +903,14 @@ export default function DatasetDetailPage() {
             {isRagSearching ? (
               <div className="flex items-center justify-center py-8">
                 <Loader2 className="h-8 w-8 animate-spin" />
-                <span className="ml-2">搜索中...</span>
+                <span className="ml-2">Searching...</span>
               </div>
             ) : searchDocuments.length === 0 ? (
               <div className="text-center py-8">
                 <FileSearch className="h-12 w-12 mx-auto text-gray-400 mb-4" />
-                <h3 className="text-lg font-medium mb-2">未找到相关文档</h3>
+                <h3 className="text-lg font-medium mb-2">No relevant documents found</h3>
                 <p className="text-muted-foreground">
-                  尝试使用不同的关键词或检查文档是否已完成向量化处理
+                  Try using different keywords or check if the document has been vectorized.
                 </p>
               </div>
             ) : (
@@ -923,11 +923,11 @@ export default function DatasetDetailPage() {
                           第 {doc.page} 页
                         </Badge>
                         <Badge variant={doc.isVector ? "default" : "secondary"} className="text-xs">
-                          {doc.isVector ? "已向量化" : "未向量化"}
+                          {doc.isVector ? "Vectorized" : "Not vectorized"}
                         </Badge>
                         {doc.isOcr && (
                           <Badge variant="outline" className="text-xs">
-                            OCR处理
+                            OCR Processing
                           </Badge>
                         )}
                       </div>
@@ -942,7 +942,7 @@ export default function DatasetDetailPage() {
                     </div>
                     <div className="flex items-center justify-between mt-3 pt-3 border-t">
                       <span className="text-xs text-muted-foreground">
-                        文档ID: {doc.fileId}
+                        Document ID: {doc.fileId}
                       </span>
                       <span className="text-xs text-muted-foreground">
                         {formatDate(doc.updatedAt)}
@@ -956,7 +956,7 @@ export default function DatasetDetailPage() {
           
           <DialogFooter>
             <Button variant="outline" onClick={clearRagSearch}>
-              关闭
+              Close
             </Button>
             {searchDocuments.length > 0 && (
               <Button onClick={() => {
@@ -967,7 +967,7 @@ export default function DatasetDetailPage() {
                 })
               }}>
                 <Download className="mr-2 h-4 w-4" />
-                导出结果
+                Export results
               </Button>
             )}
           </DialogFooter>
@@ -978,17 +978,17 @@ export default function DatasetDetailPage() {
       <Dialog open={!!fileToDelete} onOpenChange={(open) => !open && setFileToDelete(null)}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>确认删除</DialogTitle>
+            <DialogTitle>Confirm Delete</DialogTitle>
             <DialogDescription>
-              您确定要删除文件 "{fileToDelete?.originalFilename}" 吗？此操作无法撤销。
+              Are you sure you want to delete the file "{fileToDelete?.originalFilename}" ? This action cannot be undone.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <Button variant="outline" onClick={() => setFileToDelete(null)}>
-              取消
+              Cancel
             </Button>
             <Button variant="destructive" onClick={handleDeleteFile} disabled={isDeleting}>
-              {isDeleting ? "删除中..." : "确认删除"}
+              {isDeleting ? "Deleting..." : "Confirm Delete"}
             </Button>
           </DialogFooter>
         </DialogContent>
